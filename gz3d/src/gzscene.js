@@ -374,8 +374,8 @@ GZ3D.Scene.prototype.onPointerDown = function(event)
     else if (event.touches.length === 2)
     {
       pos = new THREE.Vector2(
-          (event.touches[0].clientX + event.touches[1].clientX)/2,
-          (event.touches[0].clientY + event.touches[1].clientY)/2);
+          (event.touches[0].clientX + event.touches[1].clientX)/2*window.devicePixelRatio,
+          (event.touches[0].clientY + event.touches[1].clientY)/2*window.devicePixelRatio);
     }
     else
     {
@@ -385,7 +385,7 @@ GZ3D.Scene.prototype.onPointerDown = function(event)
   else
   {
     pos = new THREE.Vector2(
-          event.clientX, event.clientY);
+          event.clientX*window.devicePixelRatio, event.clientY*window.devicePixelRatio);
     if (event.which !== 1)
     {
       mainPointer = false;
@@ -477,7 +477,7 @@ GZ3D.Scene.prototype.onMouseScroll = function(event)
 {
   event.preventDefault();
 
-  var pos = new THREE.Vector2(event.clientX, event.clientY);
+  var pos = new THREE.Vector2(event.clientX*window.devicePixelRatio, event.clientY*window.devicePixelRatio);
 
   var intersect = new THREE.Vector3();
   var model = this.getRayCastModel(pos, intersect);
@@ -2186,7 +2186,7 @@ GZ3D.Scene.prototype.showRadialMenu = function(e)
   var event = e.originalEvent;
 
   var pointer = event.touches ? event.touches[ 0 ] : event;
-  var pos = new THREE.Vector2(pointer.clientX, pointer.clientY);
+  var pos = new THREE.Vector2(pointer.clientX*window.devicePixelRatio, pointer.clientY*window.devicePixelRatio);
 
   var intersect = new THREE.Vector3();
   var model = this.getRayCastModel(pos, intersect);
@@ -2346,7 +2346,7 @@ GZ3D.Scene.prototype.hideBoundingBox = function()
  */
 GZ3D.Scene.prototype.onRightClick = function(event, callback)
 {
-  var pos = new THREE.Vector2(event.clientX, event.clientY);
+  var pos = new THREE.Vector2(event.clientX*window.devicePixelRatio, event.clientY*window.devicePixelRatio);
   var model = this.getRayCastModel(pos, new THREE.Vector3());
 
   if(model && model.name !== '' && model.name !== 'plane' &&
